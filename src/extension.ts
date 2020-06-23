@@ -1,31 +1,36 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
+import CustomTreeDataProvider from "./CustomTreeDataProvider";
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+// This method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log(
-    'Congratulations, your extension "Better Outline" is now active!'
-  );
+    vscode.window.showInformationMessage("Better Outline is now active!");
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    "better-outline.helloWorld",
-    () => {
-      // The code you place here will be executed every time your command is executed
+    // Define commands and add their disposables to subscriptions for cleanup
+    [
+        vscode.commands.registerCommand('betterOutline.helloWorld', () => {
+            vscode.window.showInformationMessage('Hello World from Better Outline!');
+        }),
+        vscode.commands.registerCommand("betterOutline.refreshTree", () => {
+            customTreeDataProvider.refresh();
+        }),
+        vscode.commands.registerCommand("betterOutline.jumpTo", (lineNumber) => {
+            vscode.window.showInformationMessage('jumpTo' + lineNumber);
+            vscode.window.activeTextEditor?.revealRange(
+                new vscode.Range(lineNumber, 0, lineNumber, 5),
+                vscode.TextEditorRevealType.AtTop
+            );
+        }),
+    ].forEach(disposable => {
+        context.subscriptions.push(disposable);
+    });
 
-      // Display a message box to the user
-      vscode.window.showInformationMessage("Hello World from Better Outline!");
-    }
-  );
+    // Set up the TreeView to show our outline for the current file
+    const customTreeDataProvider = new CustomTreeDataProvider();
+    vscode.window.createTreeView("betterOutline", {
+        treeDataProvider: customTreeDataProvider,
+    });
 
-  context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {}
+// This method is called when your extension is deactivated
+export function deactivate() { }
