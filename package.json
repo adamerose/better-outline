@@ -1,79 +1,157 @@
 {
-    "name": "better-outline",
-    "displayName": "Better Outline",
-    "description": "Extend and customize the VS Code outline view",
-    "version": "0.0.1",
-    "publisher": "adamerose",
-    "engines": {
-        "vscode": "^1.46.0"
+  "name": "better-outline",
+  "displayName": "Better Outline",
+  "description": "Extend and customize the VS Code outline view",
+  "version": "0.0.1",
+  "publisher": "adamerose",
+  "engines": {
+    "vscode": "^1.46.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:betterOutline",
+    "onCommand:betterOutline.helloWorld",
+    "onCommand:betterOutline.refreshTree",
+    "onCommand:betterOutline.addDivider"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "betterOutline.refreshTree",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "betterOutline.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "betterOutline.addDivider1",
+        "title": "Add Divider 1"
+      },
+      {
+        "command": "betterOutline.addDivider2",
+        "title": "Add Divider 2"
+      },
+      {
+        "command": "betterOutline.addDivider3",
+        "title": "Add Divider 3"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "betterOutline.addDivider1",
+        "key": "alt+d",
+        "mac": "alt+d",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "betterOutline.addDivider2",
+        "key": "alt+shift+d",
+        "mac": "alt+shift+d",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "betterOutline.addDivider3",
+        "key": "ctrl+shift+alt+d",
+        "mac": "cmd+shift+alt+d",
+        "when": "editorTextFocus"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "betterOutline",
+          "name": "Better Outline",
+          "contextualTitle": "Better Outline"
+        }
+      ]
     },
-    "categories": [
-        "Other"
+    "viewsWelcome": [
+      {
+        "view": "betterOutline",
+        "contents": "No outline items found."
+      }
     ],
-    "activationEvents": [
-        "onView:betterOutline",
-        "onCommand:betterOutline.helloWorld"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
+    "menus": {
+      "view/title": [
+        {
+          "command": "betterOutline.refreshTree",
+          "when": "view == betterOutline",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Better Outline",
+      "properties": {
+        "betterOutline.patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "title": "patternsItem",
+            "required": [
+              "match"
+            ],
+            "properties": {
+              "match": {
+                "type": "string",
+                "description": "Regex for identifying this pattern."
+              },
+              "level": {
+                "type": "number",
+                "description": "Indentation level in the outline view."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the tree item."
+              }
+            }
+          },
+          "default": [
             {
-                "command": "betterOutline.refreshTree",
-                "title": "Refresh",
-                "icon": {
-                    "light": "resources/light/refresh.svg",
-                    "dark": "resources/dark/refresh.svg"
-                }
+              "description": "Regions",
+              "match": "(?:\\#\\ %%|\\#\\ <codecell>|\\#\\ region|\\#%%|\\#Region|\\#pragma\\ region|\\#region|\\(\\#_region\\)|\\/\\*\\#region\\*\\/|\\/\\/\\ \\#region|\\/\\/\\#region|\\/\\/<editor\\-fold>|::\\#region|=pod|REM\\ \\#region) *(.*)"
             },
             {
-                "command": "betterOutline.helloWorld",
-                "title": "Hello World"
-            }
-        ],
-        "views": {
-            "explorer": [
-                {
-                    "id": "betterOutline",
-                    "name": "Better Outline",
-                    "contextualTitle": "Better Outline"
-                }
-            ]
-        },
-        "viewsWelcome": [
+              "description": "Multiline Sections",
+              "match": " *(?:!|\\#|%|'|\\-\\-|\\/\\/|;|<!\\-\\-) *(?:<|>|\\-|=|_|\\*|\\#|\\/|\\~|:|;|\\+|\\&|%|\\$|!|\"|\\ ){5,}\\n *(?:!|\\#|%|'|\\-\\-|\\/\\/|;|<!\\-\\-).*?(\\w+)"
+            },
             {
-                "view": "betterOutline",
-                "contents": "No outline items found."
+              "description": "Inline Sections",
+              "match": " *(?:!|\\#|%|'|\\-\\-|\\/\\/|;|<!\\-\\-).*?(?:<|>|\\-|=|_|\\*|\\#|\\/|\\~|:|;|\\+|\\&|%|\\$|!|\"|\\ ){3,} *(\\w+) *(?:<|>|\\-|=|_|\\*|\\#|\\/|\\~|:|;|\\+|\\&|%|\\$|!|\"|\\ ){3,}.*"
             }
-        ],
-        "menus": {
-            "view/title": [
-                {
-                    "command": "betterOutline.refreshTree",
-                    "when": "view == betterOutline",
-                    "group": "navigation"
-                }
-            ]
+          ],
+          "description": "Regex patterns to find outline sections."
         }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "lint": "eslint src --ext ts",
-        "watch": "tsc -watch -p ./",
-        "pretest": "npm run compile && npm run lint",
-        "test": "node ./out/test/runTest.js"
-    },
-    "devDependencies": {
-        "@types/vscode": "^1.46.0",
-        "@types/glob": "^7.1.1",
-        "@types/mocha": "^7.0.2",
-        "@types/node": "^13.11.0",
-        "eslint": "^6.8.0",
-        "@typescript-eslint/parser": "^2.30.0",
-        "@typescript-eslint/eslint-plugin": "^2.30.0",
-        "glob": "^7.1.6",
-        "mocha": "^7.1.2",
-        "typescript": "^3.8.3",
-        "vscode-test": "^1.3.0"
+      }
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.46.0",
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "eslint": "^6.8.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.2",
+    "typescript": "^3.8.3",
+    "vscode-test": "^1.3.0"
+  }
 }

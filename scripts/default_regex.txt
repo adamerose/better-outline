@@ -1,0 +1,30 @@
+---------------------------------------------
+Comments
+
+! SampleText            FORTRAN
+# SampleText            Bash, TCL, mySQL, Perl
+% SampleText            Prolog
+' SampleText            VB.NET
+-- SampleText           Ada, mySQL
+// SampleText           C++, Java, JavaScript
+; SampleText            ALGOL 60, Assembly
+<!-- SampleText -->     HTML
+
+---------------------------------------------
+Language Code Regions
+
+# %%                 Jupyter
+# <codecell>         Jupyter
+# region             Python
+#%%                  Jupyter
+#Region              Visual Basic
+#pragma region       C/C++
+#region              C#, Coffeescript, Perl5, PHP, PowerShell, Python
+(#_region)           F#
+/*#region*/          CSS
+// #region           JavaScript
+//#region            Java
+//<editor-fold>      Java
+::#region            Bat
+=pod                 Perl5
+REM #region          Bat
