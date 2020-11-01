@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { Command } from "vscode";
 import { isNullOrUndefined } from "util";
+import patterns from './patterns';
 
 type Pattern = {
     match: string,
@@ -21,16 +22,12 @@ export class CustomTreeDataProvider implements vscode.TreeDataProvider<CustomTre
         if (element) {
             return Promise.resolve([]);
         } else { // Build the list of root tree entries
-            let patterns = vscode.workspace.getConfiguration('betterOutline').get<Pattern[]>('patterns');
             let treeItems: CustomTreeItem[] = [];
             let rawText = vscode.window.activeTextEditor?.document.getText().replace(/\r\n/g, "\n")!;
             // Loop over all regex patterns
             patterns?.forEach(pattern => {
                 let re = new RegExp(pattern.match, 'g');
 
-
-                // let rawText = "# asdf\n qwerty\n# zxcv\n#hhhh"
-                // let re = new RegExp("#.*",'g');
                 // Loop over each match, extracting the text and line number
                 let match;
                 while ((match = re.exec(rawText)) != null) {

@@ -4,6 +4,10 @@
   "description": "Extend and customize the VS Code outline view",
   "version": "0.0.1",
   "publisher": "adamerose",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adamerose/better-outline.git"
+  }
   "engines": {
     "vscode": "^1.46.0"
   },
@@ -89,48 +93,7 @@
       ]
     },
     "configuration": {
-      "title": "Better Outline",
-      "properties": {
-        "betterOutline.patterns": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "title": "patternsItem",
-            "required": [
-              "match"
-            ],
-            "properties": {
-              "match": {
-                "type": "string",
-                "description": "Regex for identifying this pattern."
-              },
-              "level": {
-                "type": "number",
-                "description": "Indentation level in the outline view."
-              },
-              "description": {
-                "type": "string",
-                "description": "Description of the tree item."
-              }
-            }
-          },
-          "default": [
-            {
-              "description": "Regions",
-              "match": "(?:\\#\\ %%|\\#\\ <codecell>|\\#\\ region|\\#%%|\\#Region|\\#pragma\\ region|\\#region|\\(\\#_region\\)|\\/\\*\\#region\\*\\/|\\/\\/\\ \\#region|\\/\\/\\#region|\\/\\/<editor\\-fold>|::\\#region|=pod|REM\\ \\#region) *(.*)"
-            },
-            {
-              "description": "Multiline Sections",
-              "match": " *(?:!|\\#|%|'|\\-\\-|\\/\\/|;|<!\\-\\-) *(?:<|>|\\-|=|_|\\*|\\#|\\/|\\~|:|;|\\+|\\&|%|\\$|!|\"|\\ ){5,}\\n *(?:!|\\#|%|'|\\-\\-|\\/\\/|;|<!\\-\\-).*?(\\w+)"
-            },
-            {
-              "description": "Inline Sections",
-              "match": " *(?:!|\\#|%|'|\\-\\-|\\/\\/|;|<!\\-\\-).*?(?:<|>|\\-|=|_|\\*|\\#|\\/|\\~|:|;|\\+|\\&|%|\\$|!|\"|\\ ){3,} *(\\w+) *(?:<|>|\\-|=|_|\\*|\\#|\\/|\\~|:|;|\\+|\\&|%|\\$|!|\"|\\ ){3,}.*"
-            }
-          ],
-          "description": "Regex patterns to find outline sections."
-        }
-      }
+      "title": "Better Outline"
     }
   },
   "scripts": {

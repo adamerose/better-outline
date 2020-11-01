@@ -2,57 +2,55 @@
 Take a list of regex expressions and combine them into 1 and escape special characters
 """
 import re
-from collections import OrderedDict
 
 regions = [
-    '# %%',
-    '# <codecell>',
-    '# region',
-    '#%%',
-    '#Region',
-    '#pragma region',
-    '#region',
-    '(#_region)',
-    '/*#region*/',
-    '// #region',
-    '//#region',
-    '//<editor-fold>',
-    '::#region',
-    '=pod',
-    'REM #region',
-]
+  '# %%',           # Jupyter
+  '# <codecell>',   # Jupyter
+  '# region',       # Python
+  '#%%',            # Jupyter
+  '#Region',        # Visual Basic
+  '#pragma region', # C/C++
+  '#region',        # C#, Coffeescript, Perl5, PHP, PowerShell, Python
+  '(#_region)',     # F#
+  '/*#region*/',    # CSS
+  '// #region',     # JavaScript
+  '//#region',      # Java
+  '//<editor-fold>' # Java
+  '::#region',      # Bat
+  '=pod',           # Perl5
+  'REM #region',    # Bat
+];
 
 comments = [
-    '!',
-    '#',
-    '%',
-    "'",
-    '--',
-    '//',
-    ';',
-    '<!--',
-]
+  '!',        # FORTRAN
+  '#',        # Bash, TCL, mySQL, Perl
+  '%',        # Prolog
+  "'",        # VB.NET
+  '--',       # Ada, mySQL
+  '//',       # C++, Java, JavaScript
+  ';',        # ALGOL 60, Assembly
+  '<!--',     # HTML
+];
 
 dividers = [
-    '<',
-    '>',
-    '-',
-    '=',
-    '_',
-    '*',
-    '#',
-    '/',
-    '~',
-    ':',
-    ';',
-    '+',
-    '&',
-    '%',
-    '$',
-    '!',
-    '"',
-    ' ']
-
+  '<', '>',
+  '-',
+  '=',
+  '_',
+  '*',
+  '#',
+  '/',
+  '~',
+  ':',
+  ';',
+  '+',
+  '&',
+  '%',
+  '$',
+  '!',
+  '"',
+  ' ',
+];
 
 def escape(string):
     result = re.escape(string)
