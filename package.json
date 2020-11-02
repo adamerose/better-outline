@@ -2,7 +2,7 @@
   "name": "better-outline",
   "displayName": "Better Outline",
   "description": "Extend and customize the VS Code outline view",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "adamerose",
   "repository": {
     "type": "git",
