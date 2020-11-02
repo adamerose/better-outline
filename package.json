@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/adamerose/better-outline.git"
-  }
+  },
   "engines": {
     "vscode": "^1.46.0"
   },
@@ -16,10 +16,7 @@
   ],
   "main": "./out/extension.js",
   "activationEvents": [
-    "onView:betterOutline",
-    "onCommand:betterOutline.helloWorld",
-    "onCommand:betterOutline.refreshTree",
-    "onCommand:betterOutline.addDivider"
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [
@@ -32,39 +29,25 @@
         }
       },
       {
-        "command": "betterOutline.helloWorld",
-        "title": "Hello World"
+        "command": "betterOutline.addDivider",
+        "title": "Add Divider"
       },
       {
-        "command": "betterOutline.addDivider1",
-        "title": "Add Divider 1"
-      },
-      {
-        "command": "betterOutline.addDivider2",
-        "title": "Add Divider 2"
-      },
-      {
-        "command": "betterOutline.addDivider3",
-        "title": "Add Divider 3"
+        "command": "betterOutline.addHeader",
+        "title": "Add Header"
       }
     ],
     "keybindings": [
       {
-        "command": "betterOutline.addDivider1",
+        "command": "betterOutline.addDivider",
         "key": "alt+d",
         "mac": "alt+d",
         "when": "editorTextFocus"
       },
       {
-        "command": "betterOutline.addDivider2",
+        "command": "betterOutline.addHeader",
         "key": "alt+shift+d",
         "mac": "alt+shift+d",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "betterOutline.addDivider3",
-        "key": "ctrl+shift+alt+d",
-        "mac": "cmd+shift+alt+d",
         "when": "editorTextFocus"
       }
     ],

@@ -4,13 +4,10 @@ import { getCommentSymbols } from "./symbols";
 
 // This method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
-  vscode.window.showInformationMessage("Better Outline is now active!");
+  // vscode.window.showInformationMessage("Better Outline is now active!");
 
   [
     // Commands
-    vscode.commands.registerCommand("betterOutline.helloWorld", () => {
-      vscode.window.showInformationMessage("Hello World from Better Outline!");
-    }),
     vscode.commands.registerCommand("betterOutline.refreshTree", () => {
       customTreeDataProvider.refresh();
     }),
@@ -21,14 +18,11 @@ export function activate(context: vscode.ExtensionContext) {
       );
     }),
 
-    vscode.commands.registerCommand("betterOutline.addDivider1", () => {
+    vscode.commands.registerCommand("betterOutline.addDivider", () => {
       addDivider(1);
     }),
-    vscode.commands.registerCommand("betterOutline.addDivider2", () => {
+    vscode.commands.registerCommand("betterOutline.addHeader", () => {
       addDivider(2);
-    }),
-    vscode.commands.registerCommand("betterOutline.addDivider3", () => {
-      addDivider(3);
     }),
 
     // Event Listeners
@@ -50,10 +44,12 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 async function addDivider(lineCount: 1 | 2 | 3, lineWidth: number = 80) {
-  vscode.window.showInformationMessage(`Added divider (${lineCount})`);
+  // vscode.window.showInformationMessage(`Added divider (${lineCount})`);
   // Get current text editor
   let editor = vscode.window.activeTextEditor;
-  if (editor == undefined) { return; }
+  if (editor == undefined) {
+    return;
+  }
 
   // Get symbols to make comments for current language
   let lang = editor.document.languageId;
@@ -71,7 +67,6 @@ async function addDivider(lineCount: 1 | 2 | 3, lineWidth: number = 80) {
   let initialText = editor.document.getText(initialSelection);
   let fillWidth = lineWidth - (symbols.left.length + symbols.right.length + 2);
 
-
   let fillLine = `${symbols.left} ${"=".repeat(fillWidth)} ${symbols.right}`;
   if (lineCount === 1) {
     var snippet = `${fillLine}\n${symbols.left} ${initialText}\n`;
@@ -83,14 +78,12 @@ async function addDivider(lineCount: 1 | 2 | 3, lineWidth: number = 80) {
     throw Error("Not implemented");
   }
 
-
-  await editor.edit(editBuilder => {
+  await editor.edit((editBuilder) => {
     editBuilder.replace(initialSelection, snippet);
   });
   let newSelection = new vscode.Selection(positionToSetCursor, positionToSetCursor);
   editor.selection = newSelection;
-
-};
+}
 
 // This method is called when your extension is deactivated
-export function deactivate() { }
+export function deactivate() {}

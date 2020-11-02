@@ -4,53 +4,54 @@ Take a list of regex expressions and combine them into 1 and escape special char
 import re
 
 regions = [
-  '# %%',           # Jupyter
-  '# <codecell>',   # Jupyter
-  '# region',       # Python
-  '#%%',            # Jupyter
-  '#Region',        # Visual Basic
-  '#pragma region', # C/C++
-  '#region',        # C#, Coffeescript, Perl5, PHP, PowerShell, Python
-  '(#_region)',     # F#
-  '/*#region*/',    # CSS
-  '// #region',     # JavaScript
-  '//#region',      # Java
-  '//<editor-fold>' # Java
-  '::#region',      # Bat
-  '=pod',           # Perl5
-  'REM #region',    # Bat
-];
+    '# %%',           # Jupyter
+    '# <codecell>',   # Jupyter
+    '# region',       # Python
+    '#%%',            # Jupyter
+    '#Region',        # Visual Basic
+    '#pragma region',  # C/C++
+    '#region',        # C#, Coffeescript, Perl5, PHP, PowerShell, Python
+    '(#_region)',     # F#
+    '/*#region*/',    # CSS
+    '// #region',     # JavaScript
+    '//#region',      # Java
+    '//<editor-fold>'  # Java
+    '::#region',      # Bat
+    '=pod',           # Perl5
+    'REM #region',    # Bat
+]
 
 comments = [
-  '!',        # FORTRAN
-  '#',        # Bash, TCL, mySQL, Perl
-  '%',        # Prolog
-  "'",        # VB.NET
-  '--',       # Ada, mySQL
-  '//',       # C++, Java, JavaScript
-  ';',        # ALGOL 60, Assembly
-  '<!--',     # HTML
-];
+    '!',        # FORTRAN
+    '#',        # Bash, TCL, mySQL, Perl
+    '%',        # Prolog
+    "'",        # VB.NET
+    '--',       # Ada, mySQL
+    '//',       # C++, Java, JavaScript
+    ';',        # ALGOL 60, Assembly
+    '<!--',     # HTML
+]
 
 dividers = [
-  '<', '>',
-  '-',
-  '=',
-  '_',
-  '*',
-  '#',
-  '/',
-  '~',
-  ':',
-  ';',
-  '+',
-  '&',
-  '%',
-  '$',
-  '!',
-  '"',
-  ' ',
-];
+    '<', '>',
+    '-',
+    '=',
+    '_',
+    '*',
+    '#',
+    '/',
+    '~',
+    ':',
+    ';',
+    '+',
+    '&',
+    '%',
+    '$',
+    '!',
+    '"',
+    ' ',
+]
+
 
 def escape(string):
     result = re.escape(string)
