@@ -2,6 +2,8 @@
 
 Better Outline allows you to easily insert section divider comments and navigate quickly between them.
 
+https://marketplace.visualstudio.com/items?itemName=adamerose.better-outline
+
 ## Features
 
 Adds a section to the explorer that displays all sections and lets you click to navigate between them.
